@@ -1,3 +1,7 @@
+const socket = io();
+
+socket.on('message', ({ author, content }) => addMessage(author, content));
+
 const select = {
     loginForm: document.getElementById('welcome-form'),
     messagesSection: document.getElementById('messages-section'),
@@ -40,6 +44,7 @@ const sendMessage = function(event) {
     event.preventDefault();
     if(select.messageContentInput.value) {
         addMessage(userName, select.messageContentInput.value);
+        socket.emit('message', { author: userName, content: select.messageContentInput.value})
         select.messageContentInput.value = '';
     } else {
         alert('Try again!')
