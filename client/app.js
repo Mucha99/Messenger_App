@@ -1,6 +1,8 @@
 const socket = io();
 
 socket.on('message', ({ author, content }) => addMessage(author, content));
+socket.on("newUser", ({ author, content }) => addMessage(author, content));
+socket.on("userLeft", ({ author, content }) => addMessage(author, content));
 
 const select = {
     loginForm: document.getElementById('welcome-form'),
@@ -19,6 +21,7 @@ const login = function(event) {
         userName = select.userNameInput.value;
         select.loginForm.classList.remove('show');
         select.messagesSection.classList.add('show');
+        socket.emit('join', {name: userName, id: socket.id});
     } else {
         alert('Login error... Try again!');
     }
