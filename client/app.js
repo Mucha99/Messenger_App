@@ -29,15 +29,15 @@ function addMessage (author, content) {
     message.classList.add('message');
     message.classList.add('message--received');
     if(author === userName) {
-        message.classList.add('message--self');
-        message.innerHTML = `
-            <h3 class="message__author">${userName === author ? 'You' : author }</h3>
-            <div class="message__content">
-                ${content}
-            </div>
-        `;
-        select.messagesList.appendChild(message);
+        message.classList.add('message--self');   
     }
+    message.innerHTML = `
+        <h3 class="message__author">${userName === author ? 'You' : author }</h3>
+        <div class="message__content">
+            ${content}
+        </div>
+    `;
+    select.messagesList.appendChild(message);
 }
 
 const sendMessage = function(event) {
